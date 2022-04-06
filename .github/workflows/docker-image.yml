@@ -16,5 +16,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag corpsite:$(date +%s)
+    - name: docker tag
+      run: docker tag corpsite:$(date +%s)  docker.pkg.github.com/technobeads/corporatesite/corpsite:latest
     - name: docker push
       run: docker push docker.pkg.github.com/technobeads/corporatesite/corpsite:latest
