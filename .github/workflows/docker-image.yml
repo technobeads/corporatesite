@@ -18,5 +18,10 @@ jobs:
       run: docker build . --file Dockerfile --tag corpsite:1.0
     - name: docker tag
       run: docker tag corpsite:1.0  docker.pkg.github.com/technobeads/corporatesite/corpsite:latest
+    - name: docker login
+      env:
+        DOCKER_LOGIN: ${{secret.DOCKER_LOGIN}}
+        DOCKER_PASSWORD: ${{secret.DOCKER_PASSWORD}}
+      run: docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD https://docker.pkg.github.com
     - name: docker push
       run: docker push docker.pkg.github.com/technobeads/corporatesite/corpsite:latest
